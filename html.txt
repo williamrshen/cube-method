@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yiheng Wang - 4.43 3x3 solve - reco.nz</title>
+    <meta property="og:title" content="Yiheng Wang - 4.43 3x3 solve - reco.nz" />
+	<meta property="og:description" content="50 STM - 11.29 TPS - reconstruction by Stewy" />
+	<meta property="og:image" content="https://reco.nz/angus.png" />
+	<meta property="og:type" content="website" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+	
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-left: 20px;
+        }
+        
+        #solver-link {
+            color: white;
+            text-decoration: none;
+        }
+        #solver-link:hover {
+            color: #007bff;
+        }
+        #reconstructor-link {
+            color: white;
+            text-decoration: none;
+        }
+        #reconstructor-link:hover {
+            color: #007bff;
+        }
+        
+        #solvestats {
+        border: 2px solid white; /* Add a white border with a thickness of 2px */
+        border-collapse: collapse; /* Collapse table borders to avoid double borders */
+        width: 40%;
+        }
+    
+        #solvestats th, #solvestats td {
+            border: 1px solid white; /* Add a white border to table cells with a thickness of 1px */
+            padding: 2px; /* Add padding to the table cells for better spacing */
+            text-align: center; /* Center-align the content in cells */
+            color: white; /* Set text color to white */
+        }
+    
+        /* Add styles for table headers (th) if needed */
+        #solvestats th {
+            background-color: #333; /* Set a background color for table headers */
+        }
+        
+        .secondary {
+            padding: 80px;
+          }
+
+        @media all and (max-width: 800px) {
+          .content-wrapper {
+            display: block; 
+            float: none; 
+            width: 100%;
+            flex-direction: column;
+          }
+          #solvestats {
+            width: 95%;
+          }
+          .secondary {
+            padding: 20px;
+          }
+          iframe {
+            width: 95%;
+          }
+        }
+    </style>
+</head>
+<body>
+        <style>
+    #menu-bar {
+        background-color: #1C1C1C; /* Background color of the menu bar */
+        color: #fff; /* Text color of the menu items */
+        padding: 10px 0; /* Vertical and horizontal padding for the menu bar */
+    }
+    
+    #menu-bar ul {
+        list-style-type: none; /* Remove bullet points from the list */
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+    
+    #menu-bar ul li {
+        display: inline-block; /* Display menu items side by side */
+        margin: 0 20px; /* Horizontal spacing between menu items */
+        position: relative; /* For positioning sub-menu */
+    }
+    
+    #menu-bar ul li a {
+        text-decoration: none; /* Remove underline from links */
+        color: inherit; /* Inherit text color from parent */
+        font-size: 26px; /* Font size of the menu items */
+        font-weight: bold;
+        transition: color 0.3s; /* Add a smooth color transition effect */
+    }
+    
+    #menu-bar ul li a:hover {
+        color: #007bff; /* Text color of menu items on hover */
+    }
+    
+    /* Sub-menu styles */
+    #menu-bar ul li ul {
+        display: none; /* Hide sub-menu by default */
+        position: absolute; /* Position sub-menu relative to parent */
+        top: 100%; /* Position sub-menu directly under parent */
+        left: 0;
+        background-color: #1C1C1C; /* Background color of sub-menu */
+        padding: 0; /* Remove padding for sub-menu */
+        margin: 0; /* Remove margin */
+        z-index: 1000; /* Ensure sub-menu is on top */
+    }
+    
+    #menu-bar ul li ul li {
+        display: block; /* Display sub-menu items as block */
+        margin: 0; /* Remove margin */
+    }
+    
+    #menu-bar ul li ul li a {
+        padding: 10px 20px; /* Add padding for sub-menu items */
+        font-size: 20px; /* Font size for sub-menu items */
+        font-weight: normal; /* Normal font weight for sub-menu items */
+        color: #fff; /* Text color for sub-menu items */
+    }
+    
+    #menu-bar ul li:hover ul {
+        display: block; /* Show sub-menu on hover */
+    }
+
+    #menu-bar ul li ul li a:hover {
+        color: #007bff; /* Text color of sub-menu items on hover */
+    }
+</style>
+
+<div id="menu-bar">
+    <ul>
+        <li><a href="https://reco.nz/"><img src="../rclogo.png" alt="Home" style="max-width: 150px; max-height: 50px; margin-top: 6px;"></a></li>
+        <li><a href="https://reco.nz/solve/index">reconstructions</a></li>
+        <li>
+            <a href="javascript:void(0);">algs</a>
+            <ul>
+                <li><a href="https://reco.nz/algs/oll">oll</a></li>
+                <li><a href="https://reco.nz/algs/pll">pll</a></li>
+            </ul>
+        </li>
+        <li><a href="https://reco.nz/about">about</a></li>
+        <li><a href="https://reco.nz/faq">faq</a></li>
+    </ul>
+</div>
+<div class="content-wrapper" style="display: flex;">
+    <div class="container" style="flex: 1;">
+        <h1><a href="../solver/Yiheng_Wang" id="solver-link">Yiheng Wang</a> - 4.43 3x3 solve</h1>
+                    <h3> 2025-03-11 - Chengdu Spring Open 2025 - reconstruction by <a href="../reconstructor/Stewy" id="reconstructor-link">Stewy</a></h3>
+                <br><br>
+        <div id="reconstruction">
+                            U' F2 U' R' D2 R2 D F2 L2 R2 D2 R2 U2 F' L' U2 R2 F' R2 U2<br><br><br>
+                                        x z' // inspection<br>
+                        
+                            D' R' D2 r D2 // xcross<br>
+                        
+                        
+                            R R' R U R' U' R U R' // 2nd pair<br>
+                        
+                            U2' f R2 f' // 3rd pair<br>
+                        
+                            U' L' U L // 4th pair<br>
+                        
+                            U2 L' U' L U' L' U L U L F' L' F // OLL(CP)<br>
+                        
+                            U' R U R' U R' U' R2 U' R' U R' U R U2' // EPLL<br>
+            
+        </div>
+        <br>
+                
+                                                        view at <a href="https://alg.cubing.net/?setup=U%27+F2+U%27+R%27+D2+R2+D+F2+L2+R2+D2+R2+U2+F%27+L%27+U2+R2+F%27+R2+U2&alg=x+z%27+%2F%2F+inspection%0AD%27+R%27+D2+r+D2+%2F%2F+xcross%0AR+R%27+R+U+R%27+U%27+R+U+R%27+%2F%2F+2nd+pair%0AU2%27+f+R2+f%27+%2F%2F+3rd+pair%0AU%27+L%27+U+L+%2F%2F+4th+pair%0AU2+L%27+U%27+L+U%27+L%27+U+L+U+L+F%27+L%27+F+%2F%2F+OLL%28CP%29%0AU%27+R+U+R%27+U+R%27+U%27+R2+U%27+R%27+U+R%27+U+R+U2%27+%2F%2F+EPLL">alg.cubing.net</a>
+        
+        
+        
+        <br><br><br><br>
+                        
+            <table id='solvestats'>
+                <tr>
+                    <th></th>
+                    <th>Total</th>
+                    <th>F2L</th>
+                    <th>LL</th>
+                    <th>Cross+1</th>
+                    <th>OLS</th>
+                    <th>PLL</th>
+                </tr>
+                <tr>
+                    <th>Time</th>
+                    <td>4.43</td>
+                    <td>2.95</td>
+                    <td>1.48</td>
+                    <td>0.60</td>
+                    <td>1.67</td>
+                    <td>0.58</td>
+                </tr>
+                <tr>
+                    <th>Split</th>
+                    <td>100%</td>
+                    <td>66.6%</td>
+                    <td>33.4%</td>
+                    <td>13.5%</td>
+                    <td>37.7%</td>
+                    <td>13.1%</td>
+                </tr>
+                <tr>
+                    <th>STM</th>
+                    <td>50</td>
+                    <td>22</td>
+                    <td>28</td>
+                    <td>5</td>
+                    <td>17</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <th>STPS</th>
+                    <td>11.29</td>
+                    <td>7.46</td>
+                    <td>18.92</td>
+                    <td>8.33</td>
+                    <td>10.18</td>
+                    <td>25.86</td>
+                </tr>
+                <tr>
+                    <th>ETM</th>
+                    <td>50</td>
+                    <td>22</td>
+                    <td>28</td>
+                    <td>5</td>
+                    <td>17</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <th>ETPS</th>
+                    <td>11.29</td>
+                    <td>7.46</td>
+                    <td>18.92</td>
+                    <td>8.33</td>
+                    <td>10.18</td>
+                    <td>25.86</td>
+                </tr>
+                
+            </table>
+        <br><br>
+        
+        
+        <p>
+                        <br>
+    
+        </p>
+        
+        
+        
+
+
+
+        
+    </div>
+    
+    <div class="secondary" style="flex: 1">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/0QYnGaY1DNg" frameborder="0" allowfullscreen></iframe>
+    <br><br><br>
+    <h2>other solves in this average:</h2>
+    <div style="max-width: 800px; max-height: 300px; overflow-y: auto;">
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 10px;">
+                    <ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
+                                <li style="display: inline; margin-right: 10px;">
+        <a href="11565" style="text-decoration: none; color: white;">
+
+            3.59        </a>
+    </li>
+        <li style="display: inline; margin-right: 10px;">
+        <a href="11566" style="text-decoration: none; color: white;">
+
+            4.12        </a>
+    </li>
+        <li style="display: inline; margin-right: 10px;">
+        <a href="11567" style="text-decoration: none; color: white;">
+
+            4.34        </a>
+    </li>
+        <li style="display: inline; margin-right: 10px;">
+        <a href="11568" style="text-decoration: none; color: white;">
+
+            4.67        </a>
+    </li>
+        <li style="display: inline; margin-right: 10px;">
+        <a href="11569" style="font-weight: bold; text-decoration: underline; color: white;">
+
+            4.43        </a>
+    </li>
+                    </ul>
+                </li>
+                    </ul>
+    </div>
+    
+    <h3>= 4.3 avg</h3>    
+    
+    
+
+
+
+
+
+</div>
+</body>
+</html>
+
